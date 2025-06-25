@@ -19,7 +19,7 @@ const Assignment1 = () => {
                     ante justo. Integer euismod libero id mauris malesuada tincidunt.</p>
                 <div className="flex items-center justify-between mt-4">
                     <span className="text-gray-900 font-bold text-lg">$40.99</span>
-                    <button className="bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800">Add to Cart</button>
+                    <button className="bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800 ml-2">Add to Cart</button>
                 </div>
             </div>
             <div className="bg-white rounded-lg shadow-lg p-8">
@@ -35,7 +35,7 @@ const Assignment1 = () => {
                     ante justo. Integer euismod libero id mauris malesuada tincidunt.</p>
                 <div className="flex items-center justify-between mt-4">
                     <span className="text-gray-900 font-bold text-lg">$100</span>
-                    <button className="bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800">Add to Cart</button>
+                    <button className="bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800 ml-2">Add to Cart</button>
                 </div>
             </div>
             <div className="bg-white rounded-lg shadow-lg p-8">
@@ -51,7 +51,7 @@ const Assignment1 = () => {
                     ante justo. Integer euismod libero id mauris malesuada tincidunt.</p>
                 <div className="flex items-center justify-between mt-4">
                     <span className="text-gray-900 font-bold text-lg">$89.5</span>
-                    <button className="bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800">Add to Cart</button>
+                    <button className="bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800 ml-2">Add to Cart</button>
                 </div>
             </div>
             <div className="bg-white rounded-lg shadow-lg p-8">
@@ -67,7 +67,7 @@ const Assignment1 = () => {
                     ante justo. Integer euismod libero id mauris malesuada tincidunt</p>
                 <div className="flex items-center justify-between mt-4">
                     <span className="text-gray-900 font-bold text-lg">$31.00</span>
-                    <button className="bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800">Add to Cart</button>
+                    <button className="bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800 ml-2">Add to Cart</button>
                 </div>
              </div>
             </div>
