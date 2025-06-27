@@ -1,0 +1,68 @@
+{
+  "products": [
+    {
+      "itemName": "T-Shirt",
+      "type": "Top",
+      "notes": "Comfortable for summer",
+      "imageUrl": "/assets/T-shirt (1).jpg",
+      "id": 12345678,
+      "price": 19.99
+    },
+    {
+      "itemName": "Jeans",
+      "type": "Bottom",
+      "notes": "Classic blue denim",
+      "imageUrl": "/assets/Jeans (2).jpg",
+      "id": 23456789,
+      "price": 49.99
+    },
+    {
+      "itemName": "Jacket",
+      "type": "Outerwear",
+      "notes": "Perfect for winter",
+      "imageUrl": "/assets/Jacket (1).jpg",
+      "id": 34567890,
+      "price": 89.5
+    },
+    {
+      "itemName": "Sneakers",
+      "type": "Footwear",
+      "notes": "White and clean",
+      "imageUrl": "/assets/Sneakers (1).jpg",
+      "id": 45678901,
+      "price": 59.0
+    },
+    {
+      "itemName": "Iphone 16",
+      "type": "Mobile Accessories",
+      "notes": "Trending and savvy",
+      "imageUrl": "/assets/Iphone 16 (1).jpg",
+      "id": 56789012,
+      "price": 39.99
+    },
+    {
+      "itemName": "Gown",
+      "type": "Dress",
+      "notes": "Perfect for formal events",
+      "imageUrl": "/assets/Gown (1).jpg",
+      "id": 67890123,
+      "price": 120.0
+    },
+    {
+      "itemName": "Shirts",
+      "type": "Outwear",
+      "notes": "For Casual Occasions",
+      "imageUrl": "/assets/Shirt.jpg",
+      "id": 63133132,
+      "price": 34
+    },
+    {
+      "itemName": "MacAir M2",
+      "type": "Laptop Accessories",
+      "notes": "For Multipurpose work",
+      "imageUrl": "/assets/MacAir m2.jpg",
+      "id": 63133141,
+      "price": 50
+    }
+  ]
+}

@@ -1,9 +1,9 @@
 
 
-const Navbar = () => {
+const Navbar = ( {onProfileClick }: { onProfileClick: () => void }) => {
   return (
     <nav className="Navbar border-gray-200 bg-transparent dark:border-gray-700">
-      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+      <div className="max-w-screen-xl flex  items-center justify-between mx-auto p-4">
         <a href="" className="flex items-center space-x-3 rtl:space-x-reverse">
             {/* <img src="" className="h-8" alt="logo" /> */}
             <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">ShopFlow</span>
@@ -14,8 +14,7 @@ const Navbar = () => {
                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15" />
                </svg>
         </button>
-        <div className="hidden w-full md:block md:w-auto" id="navbar-solid-bg">
-            <ul className="flex flex-xol font-medium mt-4 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
+            <ul className="flex justify-center items-center w-full font-medium mt-4 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
                 <li>
                      <a href="/" aria-current="page" className="block py-2 px-3 md:p-0 text-white bg-blue-700 rounded-sm:md:bg-transparent md:text-blue-700 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent">Home</a>
                 </li>
@@ -28,14 +27,17 @@ const Navbar = () => {
                 <li>
                      <a href="/contact" className="block py-2 px-3 md:p-0 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contact</a>
                 </li>
-                <li>
-                    <a href="/register" className="block py-2 px-3 md:p-0 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Register</a>
-                </li>
             </ul>
+            <button onClick={onProfileClick}
+                    className="flex items-center justify-center w-9 h-9 bg-none rounded-full bg-none hover:bg-gray-300 shadow-md transition-all duration-200" aria-label="Profile">
+                      <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                          <circle cx="12" cy="6" r="4" />
+                          <path d="M4 20c0-4 8-4 8-4s8 0 8 4" />
+                      </svg>
+               </button>
         </div>
-      </div>
     </nav>
-  )
-}
+  );
+};
 
 export default Navbar;

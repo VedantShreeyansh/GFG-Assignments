@@ -1,13 +1,14 @@
-import  { useEffect} from 'react'
+import  { useEffect, useState} from 'react'
 import Navbar from './Components/Navbar';
 import AppRoutes from './Routes/AppRoutes';
+import AuthModal from './Components/AuthModal';
 import "./App.css";
 import "./index.css";
 import './global.css';
 
 const App = () => {
 
-  // const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
 
   useEffect(() => {
     // Remove any existing canvas to avoid duplicates
@@ -70,12 +71,13 @@ const App = () => {
         }}
       ></div>
          <div style={{ position: "relative", zIndex: 1 }}>
-      <Navbar />
+      <Navbar onProfileClick={() => setShowAuthModal(true)}/>
       <AppRoutes />
+      <AuthModal isOpen={showAuthModal} onClose={() => setShowAuthModal(false)} />
       </div>
     </>
-  )
-}
+  );
+};
 
   // return (
   //   <div>
