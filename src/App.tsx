@@ -1,4 +1,4 @@
-import  { useEffect, useState} from 'react'
+import { useEffect, useState } from 'react'
 import Navbar from './Components/Navbar';
 import AppRoutes from './Routes/AppRoutes';
 import AuthModal from './Components/AuthModal';
@@ -7,8 +7,10 @@ import "./index.css";
 import './global.css';
 
 const App = () => {
-
   const [showAuthModal, setShowAuthModal] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    return localStorage.getItem("isAuthenticated") === "true";
+  });
 
   useEffect(() => {
     // Remove any existing canvas to avoid duplicates
@@ -20,42 +22,56 @@ const App = () => {
       // @ts-ignore
       new window.FinisherHeader({
         "count": 100,
-        "size": {
-          "min": 2,
-          "max": 8,
-          "pulse": 0
-        },
-        "speed": {
-          "x": {
-            "min": 0,
-            "max": 0.4
-          },
-          "y": {
-            "min": 0,
-            "max": 0.6
-          }
-        },
-        "colors": {
-          "background": "#111827",
-          "particles": [
-            "#fbfcca",
-            "#d7f3fe",
-            "#ffd0a7"
-          ]
-        },
+        "size": { "min": 2, "max": 8, "pulse": 0 },
+        "speed": { "x": { "min": 0, "max": 0.4 }, "y": { "min": 0, "max": 0.6 } },
+        "colors": { "background": "#111827", "particles": ["#fbfcca", "#d7f3fe", "#ffd0a7"] },
         "blending": "overlay",
-        "opacity": {
-          "center": 1,
-          "edge": 0
-        },
+        "opacity": { "center": 1, "edge": 0 },
         "skew": 0,
-        "shapes": [
-          "c"
-        ]
+        "shapes": ["c"]
       });
     }
   }, []);
 
+  const handleAuthSuccess = () => {
+    setIsAuthenticated(true);
+    localStorage.setItem("isAuthenticated", "true");
+    setShowAuthModal(false);
+  }
+
+  const handleLogout = () => {
+    localStorage.clear();
+    setIsAuthenticated(false);
+    setShowAuthModal(false);
+  }
+
+  // Show only AuthModal on first load
+  if (!isAuthenticated) {
+    return (
+      <>
+        <div
+          className="finisher-header"
+          style={{
+            width: "100vw",
+            height: "100vh",
+            position: "fixed",
+            top: 0,
+            left: 0,
+            zIndex: 0,
+            pointerEvents: "none",
+          }}
+        ></div>
+        <AuthModal
+          isOpen={true}
+          onClose={() => {}}
+          // Add this prop to your AuthModal and Login component:
+          onAuthSuccess={handleAuthSuccess}
+        />
+      </>
+    );
+  }
+
+  // When authenticated, show Navbar and routes
   return (
     <>
       <div
@@ -70,25 +86,23 @@ const App = () => {
           pointerEvents: "none",
         }}
       ></div>
-         <div style={{ position: "relative", zIndex: 1 }}>
-      <Navbar onProfileClick={() => setShowAuthModal(true)}/>
-      <AppRoutes />
-      <AuthModal isOpen={showAuthModal} onClose={() => setShowAuthModal(false)} />
+      <div style={{ position: "relative", zIndex: 1 }}>
+        <Navbar onProfileClick={handleLogout} />
+        <div className={showAuthModal ? "pointer-events-none opacity-50 select-none" : ""}>
+          <AppRoutes />
+        </div>
+        {/* <AuthModal
+          isOpen={showAuthModal}
+          onClose={() => setShowAuthModal(false)}
+          onAuthSuccess={() => setShowAuthModal(false)}
+        /> */}
+        {/* Overlay to disable UI when modal is open */}
+        {/* {showAuthModal && (
+          <div className="fixed inset-0 bg-black bg-opacity-40 z-40"></div>
+        )} */}
       </div>
     </>
   );
 };
-
-  // return (
-  //   <div>
-  //     <h1>Welcome to React Portal</h1>
-  //     <button onClick={() => setIsModalOpen(true)}>Open Modal</button>
-  //     <Modal isOpen={isModalOpen}>
-  //       <h2>This is a Modal</h2>
-  //     </Modal>
-  //     <button onClick={() => setIsModalOpen(false)}>Close Modal</button>
-  //   </div>
-  // )
-
 
 export default App;
