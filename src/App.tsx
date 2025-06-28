@@ -40,7 +40,7 @@ const App = () => {
   }
 
   const handleLogout = () => {
-    localStorage.clear();
+    localStorage.setItem("isAuthenticated", "false");
     setIsAuthenticated(false);
     setShowAuthModal(false);
   }
@@ -72,36 +72,33 @@ const App = () => {
   }
 
   // When authenticated, show Navbar and routes
-  return (
-    <>
-      <div
-        className="finisher-header"
-        style={{
-          width: "100vw",
-          height: "100vh",
-          position: "fixed",
-          top: 0,
-          left: 0,
-          zIndex: 0,
-          pointerEvents: "none",
-        }}
-      ></div>
+ return (
+  <>
+    <div
+      className="finisher-header"
+      style={{
+        width: "100vw",
+        height: "100vh",
+        position: "fixed",
+        top: 0,
+        left: 0,
+        zIndex: 0,
+        pointerEvents: "none",
+      }}
+    ></div>
+    {showAuthModal ? (
+      <AuthModal
+        isOpen={true}
+        onClose={() => setShowAuthModal(false)}
+        onAuthSuccess={() => setShowAuthModal(false)}
+      />
+    ) : (
       <div style={{ position: "relative", zIndex: 1 }}>
         <Navbar onProfileClick={handleLogout} />
-        <div className={showAuthModal ? "pointer-events-none opacity-50 select-none" : ""}>
-          <AppRoutes />
-        </div>
-        {/* <AuthModal
-          isOpen={showAuthModal}
-          onClose={() => setShowAuthModal(false)}
-          onAuthSuccess={() => setShowAuthModal(false)}
-        /> */}
-        {/* Overlay to disable UI when modal is open */}
-        {/* {showAuthModal && (
-          <div className="fixed inset-0 bg-black bg-opacity-40 z-40"></div>
-        )} */}
+        <AppRoutes />
       </div>
-    </>
+    )}
+  </>
   );
 };
 
