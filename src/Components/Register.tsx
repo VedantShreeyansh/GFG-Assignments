@@ -2,8 +2,7 @@ import { useState }from 'react'
 
 const Register = () => {
   const [form, setForm] = useState({ name: "", email: "", password: "", confirmPassword: "" });
-  const [email, setEmail] = useState('');
-
+  
    const validation = () => {
     if (!form.name.trim()) {
         alert("Name is required");
