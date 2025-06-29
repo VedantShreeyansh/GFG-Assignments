@@ -58,7 +58,7 @@ const Navbar = ( { onLoginRegister, onWishlist, onCart, onProfile, }: { onLoginR
                     className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                     onClick={() => {
                       setDropdownOpen(false);
-                      onLoginRegister();
+                      onProfile && onProfile();
                     }}
                   >
                     Profile Page

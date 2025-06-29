@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react'
 import Navbar from './Components/Navbar';
 import AppRoutes from './Routes/AppRoutes';
 import AuthModal from './Components/AuthModal';
+import ProfilePage from './Components/ProfilePage';
 import "./App.css";
 import "./index.css";
 import './global.css';
 
 const App = () => {
   const [showAuthModal, setShowAuthModal] = useState(false);
+  const [showProfile, setShowProfile] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
     return localStorage.getItem("isAuthenticated") === "true";
   });
@@ -98,7 +100,8 @@ return (
       />
     ) : (
       <div style={{ position: "relative", zIndex: 1 }}>
-        <Navbar onLoginRegister={handleLoginRegister} />
+        <Navbar onLoginRegister={handleLoginRegister} 
+        onProfile={() => setShowProfile(true)}/>
         <AppRoutes />
       </div>
     )}

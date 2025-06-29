@@ -55,15 +55,29 @@ const Login = ({
   const handleOtpSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (otp === "123456") {
-      setOtpSuccess(true);
-      setTimeout(() => {
-        setStep("login");
-        setForm({ email: "", password: "" });
-        setOtp("");
-        setOtpSuccess(false);
-        onLoginSuccess();
-      }, 1500);
-    } else {
+  const registeredUser = JSON.parse(localStorage.getItem(form.email) || "null");
+  if (!registeredUser) {
+    alert("No user registered with this email.");
+    return;
+  }
+  setOtpSuccess(true);
+  setTimeout(() => {
+    localStorage.setItem(
+      "user",
+      JSON.stringify({
+        email: registeredUser.email,
+        name: registeredUser.name,
+        isAuthenticated: true,
+      })
+    );
+    localStorage.setItem("isAuthenticated", "true");
+    setStep("login");
+    setForm({ email: "", password: "" });
+    setOtp("");
+    setOtpSuccess(false);
+    onLoginSuccess();
+   }, 1500);
+  } else {
       alert("Invalid OTP. Try 123456");
     }
   };
