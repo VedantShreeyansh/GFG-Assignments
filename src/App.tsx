@@ -12,6 +12,12 @@ const App = () => {
     return localStorage.getItem("isAuthenticated") === "true";
   });
 
+  const handleLoginRegister = () => {
+    localStorage.setItem("isAuthenticated", "false");
+    setIsAuthenticated(false);
+    setShowAuthModal(true);
+  }
+
   useEffect(() => {
     // Remove any existing canvas to avoid duplicates
     const oldCanvas = document.getElementById('finisher-canvas');
@@ -47,32 +53,30 @@ const App = () => {
 
   // Show only AuthModal on first load
   if (!isAuthenticated) {
-    return (
-      <>
-        <div
-          className="finisher-header"
-          style={{
-            width: "100vw",
-            height: "100vh",
-            position: "fixed",
-            top: 0,
-            left: 0,
-            zIndex: 0,
-            pointerEvents: "none",
-          }}
-        ></div>
-        <AuthModal
-          isOpen={true}
-          onClose={() => {}}
-          // Add this prop to your AuthModal and Login component:
-          onAuthSuccess={handleAuthSuccess}
-        />
-      </>
-    );
-  }
-
+  return (
+    <>
+      <div
+        className="finisher-header"
+        style={{
+          width: "100vw",
+          height: "100vh",
+          position: "fixed",
+          top: 0,
+          left: 0,
+          zIndex: 0,
+          pointerEvents: "none",
+        }}
+      ></div>
+      <AuthModal
+        isOpen={true}
+        onClose={() => {}}
+        onAuthSuccess={handleAuthSuccess}
+      />
+    </>
+  );
+}
   // When authenticated, show Navbar and routes
- return (
+return (
   <>
     <div
       className="finisher-header"
@@ -90,11 +94,11 @@ const App = () => {
       <AuthModal
         isOpen={true}
         onClose={() => setShowAuthModal(false)}
-        onAuthSuccess={() => setShowAuthModal(false)}
+        onAuthSuccess={handleAuthSuccess}
       />
     ) : (
       <div style={{ position: "relative", zIndex: 1 }}>
-        <Navbar onProfileClick={handleLogout} />
+        <Navbar onLoginRegister={handleLoginRegister} />
         <AppRoutes />
       </div>
     )}
