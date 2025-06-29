@@ -30,27 +30,59 @@ function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
 
   // Registration handler
 
-  const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
-    if (validation()) {
-      const res = await fetch('http://localhost:5000/api/register', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json'},
-      body: JSON.stringify(form),
-      });
-      const data = await res.json();
-      if (res.ok) {
-        localStorage.setItem(
-          form.email,
-          JSON.stringify({ password: form.password, name: form.name})
-        );
-       alert("Registration successful! ");
-       setForm({ name: "", email: "", password: "", confirmPassword: ""});
-      } else {
-        alert(data.message || "Registration failed");
-      }
+  // const handleSubmit = async (event: React.FormEvent) => {
+  //   event.preventDefault();
+  //   if (validation()) {
+  //     const res = await fetch('http://localhost:5000/api/register', {
+  //     method: 'POST',
+  //     headers: { 'Content-Type': 'application/json'},
+  //     body: JSON.stringify(form),
+  //     });
+  //     const data = await res.json();
+  //     if (res.ok) {
+  //       localStorage.setItem(
+  //         form.email,
+  //         JSON.stringify({ password: form.password, name: form.name, email: form.email})
+  //       );
+  //      alert("Registration successful! ");
+  //      setForm({ name: "", email: "", password: "", confirmPassword: ""});
+  //     } else {
+  //       alert(data.message || "Registration failed");
+  //     }
+  //   }
+  // };
+
+  const handleSubmit = (event: React.FormEvent) => {
+  event.preventDefault();
+  if (validation()) {
+    // Check if user already exists
+    if (localStorage.getItem(form.email)) {
+      alert("User already registered with this email.");
+      return;
     }
-  };
+    // Save user data to localStorage
+    localStorage.setItem(
+      form.email,
+      JSON.stringify({
+        password: form.password,
+        name: form.name,
+        email: form.email,
+        isAuthenticated: true,
+      })
+    );
+    // Optionally, set the "user" and "isAuthenticated" keys for your app logic
+    // localStorage.setItem(
+    //   "user",
+    //   JSON.stringify({
+    //     name: form.name,
+    //     email: form.email,
+    //   })
+    // );
+    // localStorage.setItem("isAuthenticated", "true");
+    alert("Registration successful!");
+    setForm({ name: "", email: "", password: "", confirmPassword: "" });
+  }
+};
 
      // OTP verification handler
     //  const handleOtpSubmit = async (event: React.FormEvent) => {
