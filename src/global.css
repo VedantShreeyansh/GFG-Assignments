@@ -5,3 +5,10 @@ html, body {
 .Navbar {
     box-shadow: 0 8px 24px gray;
 }
+
+.cart {
+    min-width: 1200px;
+    min-height: 80vh;
+    margin: 2rem auto;
+    padding: 2.5rem 2rem;
+}

@@ -4,15 +4,34 @@ import Register from '../Components/Register';
 import Services from '../Components/Services';
 import Pricing from "../Components/Pricing";
 import ContactUs from "../Components/ContactUs";
+import Listing from "../Components/Listing";
+import Cart from "../Components/Cart";
+import type { CartItem } from "../types/CartItem";
 
+interface AppRoutesProps {
+  addToCart: (product: CartItem) => void;
+  cartItems: CartItem[];
+  removeFromCart: (product: CartItem) => void;
+  clearCart: () => void;
+}
 
-const AppRoutes = () => (
+const AppRoutes = ({ addToCart, cartItems, removeFromCart, clearCart }: AppRoutesProps) => (
   <Routes>
-     <Route path="/" element={<Assignment1 />} />
+     <Route path="/" element={<Assignment1 addToCart={addToCart}/>} />
      <Route path="/register" element={<Register />} />
      <Route path="/services" element={<Services />} />
      <Route path="/pricing" element={<Pricing />} />
      <Route path="/contact" element={<ContactUs />} />
+     <Route path="/listing" element={<Listing addToCart={addToCart} />} />
+     <Route path="/cart" element={
+        <Cart 
+        cartItems={cartItems}
+        addToCart={addToCart}
+        removeFromCart={removeFromCart}
+        clearCart={clearCart} onClose={function (): void {
+        throw new Error("Function not implemented.");
+        } } />
+     } />
   </Routes>
 )
 

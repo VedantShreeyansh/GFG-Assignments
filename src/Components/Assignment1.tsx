@@ -1,4 +1,9 @@
 import { useEffect, useState } from "react";
+import type { CartItem } from "../types/CartItem";
+
+interface Assignment1Props {
+  addToCart: (product: CartItem) => void;
+}
 
 type Product = {
   itemName: string;
@@ -9,7 +14,7 @@ type Product = {
   price: number;
 };
 
-const Assignment1 = () => {
+const Assignment1 = ({ addToCart }: Assignment1Props) => {
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
@@ -51,7 +56,8 @@ const Assignment1 = () => {
                 <span className="text-gray-900 font-bold text-lg">
                   ${product.price}
                 </span>
-                <button className="bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800 ml-2">
+                <button className="bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800 ml-2"
+                onClick={() => addToCart({ ...product, quantity: 1 })}>
                   Add to Cart
                 </button>
               </div>

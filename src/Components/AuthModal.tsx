@@ -70,7 +70,7 @@ const Login = ({
         isAuthenticated: true,
       })
     );
-    localStorage.setItem("isAuthenticated", "true");
+    // localStorage.setItem("isAuthenticated", "true");
     setStep("login");
     setForm({ email: "", password: "" });
     setOtp("");

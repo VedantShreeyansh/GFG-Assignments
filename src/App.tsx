@@ -6,10 +6,33 @@ import ProfilePage from './Components/ProfilePage';
 import "./App.css";
 import "./index.css";
 import './global.css';
+import Cart from './Components/Cart';;
+
+type Product = {
+  itemName: string;
+  type: string;
+  imageUrl: string;
+  id: number;
+  price: number;
+  quantity?: number;
+};
+
+type CartItem = {
+  itemName: string;
+  type: string;
+  imageUrl: string;
+  id: number;
+  price: number;
+  quantity: number;
+}
+
 
 const App = () => {
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [showCart, setShowCart] = useState(false);
+  const cartCount = cartItems.reduce((sum, item) => sum + (item.quantity || 1), 0);
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
     return localStorage.getItem("isAuthenticated") === "true";
   });
@@ -18,6 +41,37 @@ const App = () => {
     localStorage.setItem("isAuthenticated", "false");
     setIsAuthenticated(false);
     setShowAuthModal(true);
+  }
+
+  const addToCart = (product: CartItem) => {
+  setCartItems(prev => {
+    const found = prev.find(item => item.id === product.id);
+    if (found) {
+      return prev.map(item =>
+        item.id === product.id
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
+      );
+    } else {
+      // Always ensure quantity is set
+      return [...prev, { ...product, quantity: product.quantity ?? 1 }];
+    }
+  });
+};
+
+  const removeFromCart = (product: CartItem) => {
+    setCartItems(prev => {
+      const found = prev.find(item => item.id === product.id);
+      if (found && found.quantity > 1){
+        return prev.map(item =>
+           item.id === product.id
+           ? { ...item, quantity: item.quantity - 1}
+           : item
+        );
+      } else {
+        return prev.filter(item => item.id !== product.id);
+      }
+    })
   }
 
   useEffect(() => {
@@ -77,6 +131,14 @@ const App = () => {
     </>
   );
 }
+  function handleWishlist(): void {
+    throw new Error('Function not implemented.');
+  }
+
+  // function setShowCart(arg0: boolean): void {
+  //   throw new Error('Function not implemented.');
+  // }
+
   // When authenticated, show Navbar and routes
 return (
   <>
@@ -92,7 +154,9 @@ return (
         pointerEvents: "none",
       }}
     ></div>
-    {showAuthModal ? (
+    {showProfile ? (
+      <ProfilePage onClose={() => setShowProfile(false)} />
+    ) : showAuthModal ? (
       <AuthModal
         isOpen={true}
         onClose={() => setShowAuthModal(false)}
@@ -100,9 +164,27 @@ return (
       />
     ) : (
       <div style={{ position: "relative", zIndex: 1 }}>
-        <Navbar onLoginRegister={handleLoginRegister} 
-        onProfile={() => setShowProfile(true)}/>
-        <AppRoutes />
+         {/* Show Cart modal/page if open */}
+          {showCart && (
+            <Cart
+              cartItems={cartItems}
+              addToCart={addToCart}
+              removeFromCart={removeFromCart}
+              clearCart={() => setCartItems([])}
+              onClose={() => setShowCart(false)}
+            />
+          )}
+        <Navbar onLoginRegister={handleLoginRegister}
+        onWishlist={handleWishlist}
+        onCart={() => setShowCart(true)}
+        onProfile={() => setShowProfile(true)}
+        cartCount={cartCount} />
+        <AppRoutes
+          addToCart={addToCart}
+          cartItems={cartItems}
+          removeFromCart={removeFromCart}
+          clearCart={() => setCartItems([])}
+        />
       </div>
     )}
   </>
