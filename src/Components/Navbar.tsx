@@ -1,11 +1,12 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
-const Navbar = ( { onLoginRegister, onWishlist, onCart, onProfile, cartCount = 0, }: { onLoginRegister: () => void; onWishlist?: () => void; onCart?: () => void; onProfile?: () => void; cartCount?: number;}) => {
+const Navbar = ( { onLoginRegister, onProfile, cartCount = 0, }: { onLoginRegister: () => void; onWishlist?: () => void; onCart?: () => void; onProfile?: () => void; cartCount?: number;}) => {
   const navigate = useNavigate();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [animateCart, setAnimateCart] = useState(false);
   const prevCartCount = useRef(cartCount);
+  const [searchFocused, setSearchFocused] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
