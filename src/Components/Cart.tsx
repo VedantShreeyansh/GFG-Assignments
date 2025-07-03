@@ -1,5 +1,6 @@
 import React from "react";
 import type { CartItem } from "../types/CartItem";
+import { useNavigate } from "react-router-dom";
 
 interface CartProps {
   cartItems: CartItem[];
@@ -14,15 +15,15 @@ const Cart: React.FC<CartProps> = ({
   addToCart,
   removeFromCart,
   clearCart,
-  onClose,
 }) => {
   const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
   const taxes = +(subtotal * 0.1).toFixed(2); // 10% tax
   const shipping = subtotal > 0 ? 0 : 0;
   const total = subtotal + taxes + shipping;
+  const navigate = useNavigate();
 
   return (
-      <div className="cart bg-gray-100 rounded-lg shadow-lg w-full max-w-4xl p-8 relative mx-2">
+      <div className="cart bg-gray-100 rounded-lg shadow-lg w-full max-w-4xl p-8 relative mx-2 ">
         <h1 className="text-2xl font-semibold mb-4">Shopping Cart</h1>
         <div className="flex flex-col md:flex-row gap-4">
           <div className="md:w-3/4">
@@ -113,7 +114,7 @@ const Cart: React.FC<CartProps> = ({
               </button>
               <button
                 className="bg-green-500 text-white py-2 px-4 rounded-lg mt-4 w-full"
-                disabled={cartItems.length === 0}
+                disabled={cartItems.length === 0} onClick={() => navigate("/checkout")}
               >
                 Checkout
               </button>

@@ -7,15 +7,17 @@ import ContactUs from "../Components/ContactUs";
 import Listing from "../Components/Listing";
 import Cart from "../Components/Cart";
 import type { CartItem } from "../types/CartItem";
+import Checkout from "../Components/Checkout";
 
 interface AppRoutesProps {
   addToCart: (product: CartItem) => void;
   cartItems: CartItem[];
   removeFromCart: (product: CartItem) => void;
   clearCart: () => void;
+  total: number;
 }
 
-const AppRoutes = ({ addToCart, cartItems, removeFromCart, clearCart }: AppRoutesProps) => (
+const AppRoutes = ({ addToCart, cartItems, removeFromCart, clearCart, total }: AppRoutesProps) => (
   <Routes>
      <Route path="/" element={<Assignment1 addToCart={addToCart}/>} />
      <Route path="/register" element={<Register />} />
@@ -23,6 +25,7 @@ const AppRoutes = ({ addToCart, cartItems, removeFromCart, clearCart }: AppRoute
      <Route path="/pricing" element={<Pricing />} />
      <Route path="/contact" element={<ContactUs />} />
      <Route path="/listing" element={<Listing addToCart={addToCart} />} />
+     <Route path="/checkout" element={<Checkout total={total} />} />
      <Route path="/cart" element={
         <Cart 
         cartItems={cartItems}
@@ -32,6 +35,7 @@ const AppRoutes = ({ addToCart, cartItems, removeFromCart, clearCart }: AppRoute
         throw new Error("Function not implemented.");
         } } />
      } />
+
   </Routes>
 )
 

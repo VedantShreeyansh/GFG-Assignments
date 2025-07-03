@@ -11,4 +11,12 @@ html, body {
     min-height: 80vh;
     margin: 2rem auto;
     padding: 2.5rem 2rem;
+    margin-top: 3rem;
+}
+
+.checkout {
+    min-width: 1200px;
+    min-height: 80vh;
+    margin: 2rem auto;
+    padding: 2.5rem 2rem;
 }

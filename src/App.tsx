@@ -37,6 +37,12 @@ const App = () => {
     return localStorage.getItem("isAuthenticated") === "true";
   });
 
+  const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+  const taxes = +(subtotal * 0.1).toFixed(2); // 10% tax
+  const shipping = subtotal > 0 ? 0 : 0;
+  const total = subtotal + taxes + shipping;
+
+
   const handleLoginRegister = () => {
     localStorage.setItem("isAuthenticated", "false");
     setIsAuthenticated(false);
@@ -184,6 +190,7 @@ return (
           cartItems={cartItems}
           removeFromCart={removeFromCart}
           clearCart={() => setCartItems([])}
+          total={total}
         />
       </div>
     )}

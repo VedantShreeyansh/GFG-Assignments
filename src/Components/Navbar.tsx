@@ -62,7 +62,7 @@ const Navbar = ( { onLoginRegister, onWishlist, onCart, onProfile, cartCount = 0
                 {/* Cart count badge behind the left corner of the icon */}
                 {cartCount > 0 && (
                   <span
-                    className={`absolute -left-3 -top-1 z-0 bg-blue-600 text-white text-xs font-bold rounded-full px-2 py-0.5 shadow transition-transform duration-300
+                    className={`absolute -left-4 -top-1 z-0 bg-blue-600 text-white text-xs font-bold rounded-full px-2 py-0.5 shadow transition-transform duration-300
                       ${animateCart ? "scale-125" : "scale-100"}`}
                     style={{ pointerEvents: "none" }}
                   >
